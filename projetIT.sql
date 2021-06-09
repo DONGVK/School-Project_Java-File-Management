@@ -14,7 +14,7 @@ CREATE TABLE Utilisateur(
         id_user  Int  Auto_increment  NOT NULL ,
         nom      Varchar (50) NOT NULL ,
         prenom   Varchar (50) NOT NULL ,
-        login    Varchar (50) NOT NULL ,
+        login    Varchar (50) NOT NULL UNIQUE,
         password Varchar (100) NOT NULL
 	,CONSTRAINT Utilisateur_PK PRIMARY KEY (id_user)
 )ENGINE=InnoDB;
@@ -87,4 +87,3 @@ CREATE TABLE acceder(
 	,CONSTRAINT acceder_Document_FK FOREIGN KEY (id_doc) REFERENCES Document(id_doc)
 	,CONSTRAINT acceder_Utilisateur0_FK FOREIGN KEY (id_user) REFERENCES Utilisateur(id_user)
 )ENGINE=InnoDB;
-
