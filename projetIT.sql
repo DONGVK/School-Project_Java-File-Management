@@ -48,6 +48,17 @@ CREATE TABLE Permission(
 
 
 #------------------------------------------------------------
+# Table: Type
+#------------------------------------------------------------
+
+CREATE TABLE Type(
+        id_type Int  Auto_increment  NOT NULL ,
+        nom     Varchar (100) NOT NULL
+	,CONSTRAINT Type_PK PRIMARY KEY (id_type)
+)ENGINE=InnoDB;
+
+
+#------------------------------------------------------------
 # Table: Document
 #------------------------------------------------------------
 
@@ -57,22 +68,11 @@ CREATE TABLE Document(
         taille      Float NOT NULL ,
         date_insert Date NOT NULL ,
         description Varchar (100) NOT NULL ,
-        chemin      Varchar (50) NOT NULL
+        chemin      Varchar (50) NOT NULL ,
+        id_type     Int NOT NULL
 	,CONSTRAINT Document_PK PRIMARY KEY (id_doc)
-)ENGINE=InnoDB;
 
-
-#------------------------------------------------------------
-# Table: Type
-#------------------------------------------------------------
-
-CREATE TABLE Type(
-        id_type Int  Auto_increment  NOT NULL ,
-        nom     Varchar (100) NOT NULL ,
-        id_doc  Int NOT NULL
-	,CONSTRAINT Type_PK PRIMARY KEY (id_type)
-
-	,CONSTRAINT Type_Document_FK FOREIGN KEY (id_doc) REFERENCES Document(id_doc)
+	,CONSTRAINT Document_Type_FK FOREIGN KEY (id_type) REFERENCES Type(id_type)
 )ENGINE=InnoDB;
 
 
