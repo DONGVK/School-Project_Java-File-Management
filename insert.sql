@@ -27,3 +27,26 @@ INSERT INTO Permission (id_user, id_role) VALUES
 (3, 2),
 (4, 2)
 ;
+
+#------------------------------------------------------------
+# Table : Type
+#------------------------------------------------------------
+INSERT INTO Type(nom) VALUES
+("exe"), ("com"), ("sh"), ("bat"),
+("arc"), ("zip"), ("rar"), ("z"), ("arj"), ("sit"), ("gz"), ("7z"),
+("gif"), ("jpg"), ("bmp"), ("png"), ("eps"), ("tif"),
+("au"), ("wav"), ("mp3"), ("oga"), ("ram"),
+("avi"), ("mpg"), ("mov"), ("mp4"),
+("docx"), ("odt"), ("doc"), ("pdf"), ("txt"), 
+("ini"), ("csv"), ("log"), ("conf"),
+("java"), ("jar"), ("py"), ("c"), ("html")
+;
+
+#------------------------------------------------------------
+# Table : Document
+#------------------------------------------------------------
+INSERT INTO Document(nom, taille, date_insert, description, chemin, nom_type) VALUES
+("grapefruit", 17.6, CURDATE(), "une image", "./stock_file/grapefruit.jpg", "jpg"),
+("stackoverflow", 105, CURDATE(), "un logo", "./stock_file/stackoverflow.png", "png"),
+("sujet5", 112, CURDATE(), "le sujet du projet", "./stock_file/sujet5.pdf", "pdf")
+;
