@@ -52,9 +52,8 @@ CREATE TABLE Permission(
 #------------------------------------------------------------
 
 CREATE TABLE Type(
-        id_type Int  Auto_increment  NOT NULL ,
-        nom     Varchar (100) NOT NULL
-	,CONSTRAINT Type_PK PRIMARY KEY (id_type)
+        nom Varchar (100) NOT NULL
+	,CONSTRAINT Type_PK PRIMARY KEY (nom)
 )ENGINE=InnoDB;
 
 
@@ -69,10 +68,10 @@ CREATE TABLE Document(
         date_insert Date NOT NULL ,
         description Varchar (100) NOT NULL ,
         chemin      Varchar (50) NOT NULL ,
-        id_type     Int NOT NULL
+        nom_Type    Varchar (100) NOT NULL
 	,CONSTRAINT Document_PK PRIMARY KEY (id_doc)
 
-	,CONSTRAINT Document_Type_FK FOREIGN KEY (id_type) REFERENCES Type(id_type)
+	,CONSTRAINT Document_Type_FK FOREIGN KEY (nom_Type) REFERENCES Type(nom)
 )ENGINE=InnoDB;
 
 
