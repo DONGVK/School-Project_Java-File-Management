@@ -1,9 +1,5 @@
 package projetmc;
 
-/**
- *
- * @author ewtrh
- */
 public class Type_doc {
     private String id_typed;
     private String libelle;
