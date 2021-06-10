@@ -1,4 +1,4 @@
-package projetmc;
+package main;
 import java.util.Date;
 
 public class Document {
@@ -9,7 +9,7 @@ public class Document {
     private Type_doc type;
     private int id_user;
     
-    //constructeur
+    //constructor
     public Document(){
         this.id_doc="";
         this.nom="";
@@ -34,5 +34,9 @@ public class Document {
     public Type_doc getType(){
         return this.type;
     }
+
+	public int getId_user() {
+		return id_user;
+	}
 
 }

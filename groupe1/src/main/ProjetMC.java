@@ -1,4 +1,4 @@
-package projetmc;
+package main;
 
 
 public class ProjetMC {
