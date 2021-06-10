@@ -7,17 +7,8 @@ CREATE DATABASE projetit;
 USE projetit;
 
 #------------------------------------------------------------
-# Table: Utilisateur
+#        Script MySQL.
 #------------------------------------------------------------
-
-CREATE TABLE Utilisateur(
-        id_user  Int  Auto_increment  NOT NULL ,
-        nom      Varchar (50) NOT NULL ,
-        prenom   Varchar (50) NOT NULL ,
-        login    Varchar (50) NOT NULL UNIQUE,
-        password Varchar (100) NOT NULL
-	,CONSTRAINT Utilisateur_PK PRIMARY KEY (id_user)
-)ENGINE=InnoDB;
 
 
 #------------------------------------------------------------
@@ -33,17 +24,19 @@ CREATE TABLE Role(
 
 
 #------------------------------------------------------------
-# Table: Permission
+# Table: Utilisateur
 #------------------------------------------------------------
 
-CREATE TABLE Permission(
-        id_permi Int  Auto_increment  NOT NULL ,
-        id_user  Int NOT NULL ,
+CREATE TABLE Utilisateur(
+        id_user  Int  Auto_increment  NOT NULL ,
+        nom      Varchar (50) NOT NULL ,
+        prenom   Varchar (50) NOT NULL ,
+        login    Varchar (50) NOT NULL UNIQUE,
+        password Varchar (100) NOT NULL ,
         id_role  Int NOT NULL
-	,CONSTRAINT Permission_PK PRIMARY KEY (id_permi)
+	,CONSTRAINT Utilisateur_PK PRIMARY KEY (id_user)
 
-	,CONSTRAINT Permission_Utilisateur_FK FOREIGN KEY (id_user) REFERENCES Utilisateur(id_user)
-	,CONSTRAINT Permission_Role0_FK FOREIGN KEY (id_role) REFERENCES Role(id_role)
+	,CONSTRAINT Utilisateur_Role_FK FOREIGN KEY (id_role) REFERENCES Role(id_role)
 )ENGINE=InnoDB;
 
 
@@ -68,10 +61,12 @@ CREATE TABLE Document(
         date_insert Date NOT NULL ,
         description Varchar (100) NOT NULL ,
         chemin      Varchar (50) NOT NULL ,
+        id_user     Int NOT NULL ,
         nom_Type    Varchar (100) NOT NULL
 	,CONSTRAINT Document_PK PRIMARY KEY (id_doc)
 
-	,CONSTRAINT Document_Type_FK FOREIGN KEY (nom_Type) REFERENCES Type(nom)
+	,CONSTRAINT Document_Utilisateur_FK FOREIGN KEY (id_user) REFERENCES Utilisateur(id_user)
+	,CONSTRAINT Document_Type0_FK FOREIGN KEY (nom_Type) REFERENCES Type(nom)
 )ENGINE=InnoDB;
 
 
@@ -87,3 +82,4 @@ CREATE TABLE acceder(
 	,CONSTRAINT acceder_Document_FK FOREIGN KEY (id_doc) REFERENCES Document(id_doc)
 	,CONSTRAINT acceder_Utilisateur0_FK FOREIGN KEY (id_user) REFERENCES Utilisateur(id_user)
 )ENGINE=InnoDB;
+
