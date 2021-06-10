@@ -1,4 +1,4 @@
-package projetmc;
+package main;
 
 public class Type_doc {
     private String id_typed;

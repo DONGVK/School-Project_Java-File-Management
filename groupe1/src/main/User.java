@@ -1,4 +1,4 @@
-package projetmc;
+package main;
 
 public class User {
     private String id_user;
