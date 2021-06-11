@@ -129,7 +129,7 @@ public class DBConnection {
   public static void insertUser(String nom, String prenom, String login, String password, int id_role) throws ClassNotFoundException{
 	  main(null);
 	  try {
-		  String query = "INSERT INTO Utilisateur (nom, prenom, login, password, id_role) VALUES(?, ?, ?, ?);";
+		  String query = "INSERT INTO Utilisateur (nom, prenom, login, password, id_role) VALUES(?, ?, ?, ?, ?);";
 	      PreparedStatement preparedStmt = con.prepareStatement(query);
 	      preparedStmt.setString(1, nom);
 	      preparedStmt.setString(2, prenom);

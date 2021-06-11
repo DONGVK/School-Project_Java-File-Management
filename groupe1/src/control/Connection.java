@@ -68,6 +68,8 @@ public class Connection{
 			 System.out.println(ar);
 			 if(Integer.parseInt(ar.get(3)) == 1) {
 				 user = new Admin(ar.get(4), ar.get(5));
+			 }else {
+				 user = new User(ar.get(4), ar.get(5));
 			 }
 		} catch (ClassNotFoundException e) {
 			return user;
