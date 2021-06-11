@@ -47,20 +47,27 @@ public class Home extends Frame{
 				
 				System.out.print( "Choix : " );
 		        int choice = Integer.parseInt(this.getSc().nextLine());
-		        if( choice >= 1 || choice <= 3 ) {
-		        	this.goTo(choice);
-		        }else {
-		        	while ( choice < 1 || choice > 2) {
-		        		System.out.print( "Veuillez choisir une option valide : " );
-		                choice = Integer.parseInt(this.getSc().nextLine());
-		        	}
-		        }
+		        while ( choice < 1 || choice > 2) {
+		       		System.out.print( "Veuillez choisir une option valide : " );
+		               choice = Integer.parseInt(this.getSc().nextLine());
+		       	}
+		        this.goTo(choice);
 			}
 		}
 		
 	}
 	
 	public void goTo(int i) {
-		
+		switch(i) {
+		case 1 :
+			break;
+		case 2 :
+			ManageUser mu = new ManageUser(this.getSc(), this.getUser());
+			mu.main();
+			break;
+		default :
+			super.setExit(true);
+			break;
+		}
 	}
 }
