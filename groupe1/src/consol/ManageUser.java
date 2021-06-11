@@ -17,9 +17,9 @@ public class ManageUser extends Frame{
 			System.out.println("\n" + "-".repeat(25) + " MENUS " + "-".repeat(25));
 			System.out.println("\n Veuillez saisir un entier : \n");
 			System.out.println(" ".repeat(20) + "1.Créer un nouvel utilisateur");
-			System.out.println(" ".repeat(20) +"2.Modifier un utiliateur");
-			System.out.println(" ".repeat(20) +"3.Supprimer un utilisateur");
-			System.out.println(" ".repeat(20) +"4.Supprimer un utilisateur");
+			System.out.println(" ".repeat(20) +"2.Supprimer un utilisateur");
+			System.out.println(" ".repeat(20) +"3.Modifier un utilisateur");
+			System.out.println(" ".repeat(20) +"4.Retour");
 			
 			System.out.print( "Choix : " );
 	        int choice = Integer.parseInt(this.getSc().nextLine());
@@ -32,13 +32,14 @@ public class ManageUser extends Frame{
 	}
 	
 	public void goTo(int i) {
+		int id_user;
+		String nom;
+		String prenom;
+		String login;
+		String password;
+		int id_role;
 		switch(i) {
 		case 1 :
-			String nom;
-			String prenom;
-			String login;
-			String password;
-			int id_role;
 			System.out.println("Veuillez saisir le nom");
 			nom = this.getSc().nextLine();
 			System.out.println("Veuillez saisir le prenom");
@@ -52,6 +53,19 @@ public class ManageUser extends Frame{
 			((Admin) this.getUser()).createUser(nom, prenom, login, password, id_role);
 			break;
 		case 2 :
+			System.out.println("Veuillez saisir l'id de l'utilisateur à supprimer");
+			id_user = Integer.parseInt(this.getSc().nextLine());
+			if(((Admin) this.getUser()).userExist(id_user)) {
+				System.out.println("Voulez vous vraiment supprimé l'utilisateur avec l'id : " + id_user + " ? o/n");
+				String choice = this.getSc().nextLine();
+				while(!(choice.toLowerCase().equals("o")) && !(choice.toLowerCase().equals("n"))) {
+					System.out.println("Voulez vous vraiment supprimé l'utilisateur : " + id_user + " ? o/n");
+					choice = this.getSc().nextLine();
+				}
+				if(choice.toLowerCase().equals("o")) {
+					((Admin) this.getUser()).deleteUser(id_user);
+				}
+			}
 			break;
 		default :
 			this.setExit(true);
