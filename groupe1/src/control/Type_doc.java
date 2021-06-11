@@ -1,4 +1,4 @@
-package main;
+package control;
 
 public class Type_doc {
     private String id_typed;
