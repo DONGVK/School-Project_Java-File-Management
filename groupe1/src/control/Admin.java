@@ -36,6 +36,18 @@ public class Admin extends User{
 	public void modifyUser(int id) {
 		
 	}
+	
+	public boolean userExist(int id_user) {
+		try {
+			if(DBConnection.selectUser(id_user).size() <= 0) {
+				return false;
+			}
+		}catch(ClassNotFoundException e) {
+			System.out.println(e);
+		}
+		return true;
+	}
+	
 
 	@Override
 	public String toString() {
