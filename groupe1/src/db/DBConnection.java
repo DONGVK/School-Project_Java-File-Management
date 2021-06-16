@@ -17,7 +17,7 @@ import control.MD5;
 public class DBConnection {
 	public static Connection con = null;
 	
-  public static void main(String[] args) throws ClassNotFoundException {
+  public static void connect() throws ClassNotFoundException {
 
     String url = "jdbc:mysql://localhost:3306/projetit";
     String username = "root";
@@ -51,7 +51,7 @@ public class DBConnection {
   
   //Have the password
   public static String selectPassword(String login) throws ClassNotFoundException{
-	  main(null);
+	  connect();
 	  Statement stmt;
 	  String res = null;
 	  try {
@@ -63,6 +63,7 @@ public class DBConnection {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+			System.out.println("Error while trying to select ...");
 		}
 	  	disconnect();
 		return res;
@@ -70,7 +71,7 @@ public class DBConnection {
   
   //Have user's informations with login
   public static ArrayList<String> selectUser(String login) throws ClassNotFoundException {
-	  main(null);
+	  connect();
 	  Statement stmt;
 	  ArrayList<String> res = new ArrayList<String>();
 	try {
@@ -92,13 +93,14 @@ public class DBConnection {
 		}
 	} catch (SQLException e) {
 		e.printStackTrace();
+		System.out.println("Error while trying to select an user ...");
 	}
 	disconnect();
 	return res;
   }
   
   public static ArrayList<String> selectUser(int id_user) throws ClassNotFoundException {
-	  main(null);
+	  connect();
 	  Statement stmt;
 	  ArrayList<String> res = new ArrayList<String>();
 	try {
@@ -111,15 +113,16 @@ public class DBConnection {
 			  res.add(r);
 			  r = rs.getString("prenom");
 			  res.add(r);
-			  r = rs.getString("id_role");
-			  res.add(r);
 			  r = rs.getString("login");
 			  res.add(r);
 			  r = rs.getString("password");
 			  res.add(r);
+			  r = rs.getString("id_role");
+			  res.add(r);
 		}
 	} catch (SQLException e) {
 		e.printStackTrace();
+		System.out.println("Error while trying to select user...");
 	}
 	disconnect();
 	return res;
@@ -127,7 +130,7 @@ public class DBConnection {
   
   //Insert a new User
   public static void insertUser(String nom, String prenom, String login, String password, int id_role) throws ClassNotFoundException{
-	  main(null);
+	  connect();
 	  try {
 		  String query = "INSERT INTO Utilisateur (nom, prenom, login, password, id_role) VALUES(?, ?, ?, ?, ?);";
 	      PreparedStatement preparedStmt = con.prepareStatement(query);
@@ -140,12 +143,14 @@ public class DBConnection {
 	      preparedStmt.executeUpdate();
 	} catch (SQLException e) {
 		e.printStackTrace();
+		System.out.println("Error while trying to insert user ...");
 	}
+	  disconnect();
   }
   
 //Delete user
   public static void deleteUser(int id_role) throws ClassNotFoundException{
-	  main(null);
+	  connect();
 	  try {
 		  String query = "DELETE FROM Utilisateur WHERE id_user = ?";
 	      PreparedStatement preparedStmt = con.prepareStatement(query);
@@ -153,7 +158,90 @@ public class DBConnection {
 	      preparedStmt.executeUpdate();
 	} catch (SQLException e) {
 		e.printStackTrace();
+		System.out.println("Error while trying to delete user...");
 	}
+	  disconnect();
+  }
+  
+ //Modify user
+  public static void updateUserNom(int id_user, String nom) {
+	  try {
+		connect();
+		String query = "UPDATE Utilisateur SET nom = ? WHERE id_user = ?";
+	      PreparedStatement preparedStmt = con.prepareStatement(query);
+	      preparedStmt.setString(1, nom);
+	      preparedStmt.setInt(2, id_user);
+	      preparedStmt.executeUpdate();
+	} catch (ClassNotFoundException e) {
+		e.printStackTrace();
+	} catch (SQLException e) {
+		e.printStackTrace();
+	}
+	  disconnect();
+  }
+  
+  public static void updateUserPrenom(int id_user, String s) {
+	  try {
+		connect();
+		String query = "UPDATE Utilisateur SET prenom = ? WHERE id_user = ?";
+	      PreparedStatement preparedStmt = con.prepareStatement(query);
+	      preparedStmt.setString(1, s);
+	      preparedStmt.setInt(2, id_user);
+	      preparedStmt.executeUpdate();
+	} catch (ClassNotFoundException e) {
+		e.printStackTrace();
+	} catch (SQLException e) {
+		e.printStackTrace();
+	}
+	  disconnect();
+  }
+  
+  public static void updateUserLogin(int id_user, String s) {
+	  try {
+		connect();
+		String query = "UPDATE Utilisateur SET login = ? WHERE id_user = ?";
+	      PreparedStatement preparedStmt = con.prepareStatement(query);
+	      preparedStmt.setString(1, s);
+	      preparedStmt.setInt(2, id_user);
+	      preparedStmt.executeUpdate();
+	} catch (ClassNotFoundException e) {
+		e.printStackTrace();
+	} catch (SQLException e) {
+		e.printStackTrace();
+	}
+	  disconnect();
+  }
+  
+  public static void updateUserPassword(int id_user, String s) {
+	  try {
+		connect();
+		String query = "UPDATE Utilisateur SET password = ? WHERE id_user = ?";
+	      PreparedStatement preparedStmt = con.prepareStatement(query);
+	      preparedStmt.setString(1, s);
+	      preparedStmt.setInt(2, id_user);
+	      preparedStmt.executeUpdate();
+	} catch (ClassNotFoundException e) {
+		e.printStackTrace();
+	} catch (SQLException e) {
+		e.printStackTrace();
+	}
+	  disconnect();
+  }
+  
+  public static void updateUserIdRole(int id_user, int s) {
+	  try {
+		connect();
+		String query = "UPDATE Utilisateur SET id_role = ? WHERE id_user = ?";
+	      PreparedStatement preparedStmt = con.prepareStatement(query);
+	      preparedStmt.setInt(1, s);
+	      preparedStmt.setInt(2, id_user);
+	      preparedStmt.executeUpdate();
+	} catch (ClassNotFoundException e) {
+		e.printStackTrace();
+	} catch (SQLException e) {
+		e.printStackTrace();
+	}
+	  disconnect();
   }
   
 }

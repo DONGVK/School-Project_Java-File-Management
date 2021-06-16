@@ -39,7 +39,10 @@ public class MD5 {
     }
     
     public static boolean matching(String compare, String origin){
-    	return origin.equals(compare);
+    	if(compare != null && origin != null) {
+    		return origin.equals(compare);
+    	}
+    	return false;
     }
 
 }
