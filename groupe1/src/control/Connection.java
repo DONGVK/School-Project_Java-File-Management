@@ -49,7 +49,7 @@ public class Connection{
 	
 	//Compare if the password provided by the user is the same from the db
     public boolean testConnection(){
-		String passDB = null;
+		String passDB = "";
 		
 		try {
 			passDB = DBConnection.selectPassword(this.login);
@@ -65,7 +65,6 @@ public class Connection{
     	ArrayList<String> ar = new ArrayList<String>();
     	try {
 			 ar = DBConnection.selectUser(this.login);
-			 System.out.println(ar);
 			 if(Integer.parseInt(ar.get(3)) == 1) {
 				 user = new Admin(ar.get(4), ar.get(5));
 			 }else {
