@@ -11,9 +11,16 @@ import java.util.Arrays;
 
 import javax.swing.JFileChooser;
 
+import db.DBConnection;
+
 public class Test{
 	public static void main(String[]args) {
-		String s = "unfi.lol";
-		System.out.println(Arrays.toString(s.split(".")));
+		try {
+			boolean b = DBConnection.existsFile("./stock_file/grapefruit.jpg");
+			System.out.println(b);
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

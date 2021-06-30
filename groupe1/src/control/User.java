@@ -85,12 +85,13 @@ public class User {
 		    	extension = file_name.substring(index);
 		    }
 			try {
-				if(DBConnection.existsFile(path)) {
-					if(!DBConnection.existsType(extension)) {
+				if(!(DBConnection.existsFile("./stock_file/"+file_name))) {
+					System.out.println(DBConnection.existsType(extension));
+					if( !(DBConnection.existsType(extension)) ) {
 						DBConnection.insertType(extension);
 						System.out.print("Nouvelle extension " + extension + " est crée.");
 					}
-					DBConnection.insertFile(file_name, taille, description, path, this.id_user, extension);
+					DBConnection.insertFile(file_name, taille, description, "./stock_file/"+file_name, this.id_user, extension);
 					FileWriter file = new FileWriter("./stock_file/"+file_name);
 					file.write("h");
 					file.close();

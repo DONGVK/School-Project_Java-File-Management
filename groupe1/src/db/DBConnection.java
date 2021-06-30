@@ -247,7 +247,10 @@ public class DBConnection {
 //Insert a new File
   public static void insertFile(String nom, float taille, String description, String chemin, int id_user, String type) throws ClassNotFoundException{
 	  connect();
+	  Statement stmt;
 	  try {
+		  stmt = con.createStatement();
+		  stmt.executeQuery("SET foreign_key_checks = 0;");
 		  String query = "INSERT INTO Document (nom, taille, date_insert, description, chemin, id_user, nom_Type) VALUES(?, ?, current_date(), ?, ?, ?, ?);";
 	      PreparedStatement preparedStmt = con.prepareStatement(query);
 	      preparedStmt.setString(1, nom);
@@ -258,6 +261,7 @@ public class DBConnection {
 	      preparedStmt.setString(6, type);
 	      // execute the java preparedstatement
 	      preparedStmt.executeUpdate();
+	      stmt.executeQuery("SET foreign_key_checks = 1;");
 	} catch (SQLException e) {
 		e.printStackTrace();
 		System.out.println("Error while trying to insert user ...");
@@ -272,16 +276,21 @@ public class DBConnection {
 	  try {
 			stmt = con.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT * FROM Document WHERE chemin = \'" + path +"';");
-			if(rs.getRow() == 0) {
-				return true;
+			String res = null;
+			while (rs.next()) {
+				  String r = rs.getString("id_doc");
+				  res = r;
 			}
-			return false; 
+			if(res ==  null) {
+				return false;
+			}
+			return true;
 		} catch (SQLException e) {
 			e.printStackTrace();
 			System.out.println("Error while trying to select ...");
 		}
 	  	disconnect();
-		return false;
+		return true;
   }
   
 //EXTENSION IF EXISTS
@@ -291,27 +300,36 @@ public class DBConnection {
 	  try {
 			stmt = con.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT * FROM Type WHERE nom = \'" + type +"';");
-			if(rs.getRow() == 0) {
-				return true;
+			String res = null;
+			while (rs.next()) {
+				  String r = rs.getString("nom");
+				  res = r;
 			}
-			return false; 
+			if(res ==  null) {
+				return false;
+			}
+			return true; 
 		} catch (SQLException e) {
 			e.printStackTrace();
 			System.out.println("Error while trying to select ...");
 		}
 	  	disconnect();
-		return false;
+		return true;
   }
   
 //Insert a new Type
   public static void insertType(String nom) throws ClassNotFoundException{
 	  connect();
+	  Statement stmt;
 	  try {
+		  stmt = con.createStatement();
+		  stmt.executeQuery("SET foreign_key_checks = 0;");
 		  String query = "INSERT INTO Type (nom) VALUES(?);";
 	      PreparedStatement preparedStmt = con.prepareStatement(query);
 	      preparedStmt.setString(1, nom);
 	      // execute the java preparedstatement
 	      preparedStmt.executeUpdate();
+	      stmt.executeQuery("SET foreign_key_checks = 1;");
 	} catch (SQLException e) {
 		e.printStackTrace();
 		System.out.println("Error while trying to insert user ...");
