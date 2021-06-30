@@ -36,6 +36,7 @@ public class Connection{
 	public Boolean getConnect() {
 		return connect;
 	}
+	
 
 	public void setConnect(Boolean connect) {
 		this.connect = connect;
