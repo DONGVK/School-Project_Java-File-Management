@@ -54,11 +54,11 @@ public class ProjetMC {
 	        Home home = new Home(sc, co.createSession());
 	        home.main();
 		}if(choice == 2 ){
-			System.out.println("Voulez vous vraiment quitter ? (Oui/o | Non/n");
+			System.out.println("Voulez vous vraiment quitter ? (Oui/o | Non/n)");
 			String q = sc.nextLine();
 			q = q.toLowerCase();
 			while(!(q == "oui" || q != "o" || q != "non" || q != "n")) {
-				System.out.println("Voulez vous vraiment quitter ? (Oui/o | Non/n");
+				System.out.println("Voulez vous vraiment quitter ? (Oui/o | Non/n)");
 				q = sc.nextLine().toLowerCase();
 				q = q.toLowerCase();
 			}

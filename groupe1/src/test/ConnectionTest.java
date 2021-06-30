@@ -25,7 +25,6 @@ public class ConnectionTest {
 		
 		assertTrue(co.createSession() instanceof Admin);
 		assertTrue(co.createSession() instanceof User);
-		assertTrue(co.createSession() instanceof User);
 		
 	}
 

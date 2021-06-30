@@ -244,4 +244,80 @@ public class DBConnection {
 	  disconnect();
   }
   
+//Insert a new File
+  public static void insertFile(String nom, float taille, String description, String chemin, int id_user, String type) throws ClassNotFoundException{
+	  connect();
+	  try {
+		  String query = "INSERT INTO Document (nom, taille, date_insert, description, chemin, id_user, nom_Type) VALUES(?, ?, current_date(), ?, ?, ?, ?);";
+	      PreparedStatement preparedStmt = con.prepareStatement(query);
+	      preparedStmt.setString(1, nom);
+	      preparedStmt.setFloat(2, taille);
+	      preparedStmt.setString(3, description);
+	      preparedStmt.setString(4, chemin);
+	      preparedStmt.setInt(5, id_user);
+	      preparedStmt.setString(6, type);
+	      // execute the java preparedstatement
+	      preparedStmt.executeUpdate();
+	} catch (SQLException e) {
+		e.printStackTrace();
+		System.out.println("Error while trying to insert user ...");
+	}
+	  disconnect();
+  }
+  
+  //FILE IF EXIST
+  public static boolean existsFile(String path) throws ClassNotFoundException{
+	  connect();
+	  Statement stmt;
+	  try {
+			stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT * FROM Document WHERE chemin = \'" + path +"';");
+			if(rs.getRow() == 0) {
+				return true;
+			}
+			return false; 
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("Error while trying to select ...");
+		}
+	  	disconnect();
+		return false;
+  }
+  
+//EXTENSION IF EXISTS
+  public static boolean existsType(String type) throws ClassNotFoundException{
+	  connect();
+	  Statement stmt;
+	  try {
+			stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT * FROM Type WHERE nom = \'" + type +"';");
+			if(rs.getRow() == 0) {
+				return true;
+			}
+			return false; 
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("Error while trying to select ...");
+		}
+	  	disconnect();
+		return false;
+  }
+  
+//Insert a new Type
+  public static void insertType(String nom) throws ClassNotFoundException{
+	  connect();
+	  try {
+		  String query = "INSERT INTO Type (nom) VALUES(?);";
+	      PreparedStatement preparedStmt = con.prepareStatement(query);
+	      preparedStmt.setString(1, nom);
+	      // execute the java preparedstatement
+	      preparedStmt.executeUpdate();
+	} catch (SQLException e) {
+		e.printStackTrace();
+		System.out.println("Error while trying to insert user ...");
+	}
+	  disconnect();
+  }
+  
+  
 }

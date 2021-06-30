@@ -29,7 +29,7 @@ public class Home extends Frame{
 				
 				System.out.print( "Choix : " );
 		        int choice = Integer.parseInt(this.getSc().nextLine());
-		        if( choice >= 1 || choice <= 3 ) {
+		        if( choice >= 1 && choice <= 3 ) {
 		        	this.goTo(choice);
 		        }else {
 		        	while ( choice < 1 || choice > 3) {
@@ -60,6 +60,8 @@ public class Home extends Frame{
 	public void goTo(int i) {
 		switch(i) {
 		case 1 :
+			ManageFile mf = new ManageFile(this.getSc(), this.getUser());
+			mf.main();
 			break;
 		case 2 :
 			ManageUser mu = new ManageUser(this.getSc(), this.getUser());
